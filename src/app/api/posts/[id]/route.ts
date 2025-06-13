@@ -1,11 +1,23 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest } from 'next/server';
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const post = await prisma.post.findUnique({
-    where: { id: Number(params.id) },
+    where: { id: Number(params.id) }
   });
-  return Response.json(post);
+
+  if (!post) {
+    return new Response(JSON.stringify({ error: 'Post not found' }), {
+      status: 404
+    });
+  }
+
+  return new Response(JSON.stringify(post), {
+    status: 200
+  });
 }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
