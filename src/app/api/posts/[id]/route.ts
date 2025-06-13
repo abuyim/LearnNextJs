@@ -6,18 +6,14 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const post = await prisma.post.findUnique({
-    where: { id: Number(params.id) }
+    where: { id: Number(params.id) },
   });
 
   if (!post) {
-    return new Response(JSON.stringify({ error: 'Post not found' }), {
-      status: 404
-    });
+    return new Response("Not found", { status: 404 });
   }
 
-  return new Response(JSON.stringify(post), {
-    status: 200
-  });
+  return new Response(JSON.stringify(post), { status: 200 });
 }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
