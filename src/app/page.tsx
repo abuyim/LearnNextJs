@@ -6,7 +6,7 @@ import { useState } from "react";
 import PostFormModal from "@/components/PostFormModal";
 
 export default function Home() {
-  const { posts, createPost, deletePost } = usePosts();
+  const { posts, createPost, deletePost, updatePost } = usePosts();
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Home() {
 
   const handleSubmit = (data: { id?: number; title: string; content: string }) => {
     if (data.id) {
-      ;// ;updatePost(data as Post);
+      updatePost(data as Post);
     } else {
       createPost(data.title, data.content);
     }
