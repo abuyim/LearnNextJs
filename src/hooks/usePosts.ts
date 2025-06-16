@@ -34,19 +34,19 @@ export default function usePosts() {
     fetchPosts();
   };
 
-  const updatePost = async ({id, title, content} : Post) => {
-  try {
-    await fetch(`/api/posts/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, content }),
-    });
-    toast.success("Post updated");
-    fetchPosts();
-  } catch {
-    toast.error("Update failed");
-  }
-};
+//   const updatePost = async ({id, title, content} : Post) => {
+//   try {
+//     await fetch(`/api/posts/${id}`, {
+//       method: "PUT",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ title, content }),
+//     });
+//     toast.success("Post updated");
+//     fetchPosts();
+//   } catch {
+//     toast.error("Update failed");
+//   }
+// };
 
   useEffect(() => {
     fetchPosts();
@@ -57,6 +57,6 @@ export default function usePosts() {
     createPost,
     deletePost,
     fetchPosts,
-    updatePost
+    // updatePost
   };
 }
