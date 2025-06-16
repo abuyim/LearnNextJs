@@ -1,20 +1,34 @@
-import { prisma } from '@/lib/prisma';
+// app/api/posts/[id]/route.ts
 import { NextRequest } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const post = await prisma.post.findUnique({
-    where: { id: Number(params.id) },
-  });
+// export async function GET(
+//   req: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   const id = parseInt(params.id, 10);
 
-  if (!post) {
-    return new Response("Not found", { status: 404 });
-  }
+//   if (isNaN(id)) {
+//     return new Response(JSON.stringify({ error: 'Invalid ID' }), {
+//       status: 400,
+//     });
+//   }
 
-  return new Response(JSON.stringify(post), { status: 200 });
-}
+//   const post = await prisma.post.findUnique({
+//     where: { id },
+//   });
+
+//   if (!post) {
+//     return new Response(JSON.stringify({ error: 'Post not found' }), {
+//       status: 404,
+//     });
+//   }
+
+//   return new Response(JSON.stringify(post), {
+//     status: 200,
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+// }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const { title, content } = await req.json();
